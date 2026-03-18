@@ -20,3 +20,4 @@ Make sure you have these installed on your computer:
 - **Git**
 - **VS Code** or another code editor
 - **Android Studio** with Android SDK and emulator
+- **.env** file created in backend folder - Text will private
