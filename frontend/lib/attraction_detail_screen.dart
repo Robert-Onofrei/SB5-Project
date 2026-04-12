@@ -44,12 +44,34 @@ class _AttractionDetailScreenState extends State<AttractionDetailScreen> {
               ),
             ),
           ),
-          const SliverToBoxAdapter(
+
+          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [],
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text(
+                      'Heritage',
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+                  // Short description of the attraction
+                  const Text(
+                    'Built in 1584, the Spanish Arch is a remnant of the old Galway city walls, located near the River Corrib.',
+                  ),
+                ],
               ),
             ),
           ),
