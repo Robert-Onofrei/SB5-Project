@@ -24,7 +24,25 @@ class TrailDetailScreen extends StatelessWidget {
               padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [],
+                children: [
+                  // Shows key trail stats
+                  Row(
+                    //Icons from google fonts
+                    children: const [
+                      Icon(Icons.place, size: 16),
+                      SizedBox(width: 4),
+                      Text('7 stops'),
+                      SizedBox(width: 16),
+                      Icon(Icons.straighten, size: 16),
+                      SizedBox(width: 4),
+                      Text('1.2km'),
+                      SizedBox(width: 16),
+                      Icon(Icons.access_time, size: 16),
+                      SizedBox(width: 4),
+                      Text('45 min'),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
