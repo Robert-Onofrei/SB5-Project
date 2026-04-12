@@ -91,18 +91,27 @@ class TrailDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 32.0),
+        child: ElevatedButton.icon(
+          onPressed: () {},
+          icon: const Icon(Icons.map),
+          label: const Text('View on Map'),
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(50),
+          ),
+        ),
+      ),
     );
   }
 
-// Builds a single stop item with a numbered circle avatar and description
+  // Builds a single stop item with a numbered circle avatar and description
   Widget _buildStop(int number, String name, String description) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           // Numbered circle avatar for stop number
           CircleAvatar(radius: 14, child: Text('$number')),
           const SizedBox(width: 12),
