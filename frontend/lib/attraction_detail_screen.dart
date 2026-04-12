@@ -71,6 +71,20 @@ class _AttractionDetailScreenState extends State<AttractionDetailScreen> {
                   const Text(
                     'Built in 1584, the Spanish Arch is a remnant of the old Galway city walls, located near the River Corrib.',
                   ),
+
+                  const SizedBox(height: 24),
+                  // Details section header
+                  const Text(
+                    'Details',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const Divider(),
+                  // Mock detail rows, will be replaced with real data from API
+                  _buildDetailRow('Location', 'Spanish Parade, Galway'),
+                  const Divider(),
+                  _buildDetailRow('Category', 'Heritage'),
+                  const Divider(),
+                  _buildDetailRow('Built', '1584'),
                 ],
               ),
             ),
@@ -79,4 +93,19 @@ class _AttractionDetailScreenState extends State<AttractionDetailScreen> {
       ),
     );
   }
+
+  // Builds a single detail row with a label and value
+Widget _buildDetailRow(String label, String value) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: const TextStyle(color: Colors.grey)),
+        Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
+      ],
+    ),
+  );
+}
+
 }
