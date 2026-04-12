@@ -42,6 +42,17 @@ class TrailDetailScreen extends StatelessWidget {
                       Text('45 min'),
                     ],
                   ),
+                  const SizedBox(height: 16),
+                  // Section header for trail description
+                  const Text(
+                    'About this Trail',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  
+                  const Text(
+                    'The Latin Quarter Trail takes you through the heart of Galway city, exploring its rich cultural heritage, medieval architecture, and vibrant street life.',
+                  ),
                 ],
               ),
             ),
