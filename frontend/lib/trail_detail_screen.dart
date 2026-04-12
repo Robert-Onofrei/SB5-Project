@@ -9,7 +9,7 @@ class TrailDetailScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 250,
+            expandedHeight: MediaQuery.of(context).size.height * 0.3,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               title: const Text('Latin Quarter Trail'),
