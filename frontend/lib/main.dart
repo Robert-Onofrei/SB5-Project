@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'attraction_detail_screen.dart';
+import 'attraction_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: const Color.fromARGB(255, 1, 44, 15)),
       ),
-home: const AttractionDetailScreen(),
+home: AttractionDetailScreen(attraction: mockAttractions[0]),
     );
   }
 }

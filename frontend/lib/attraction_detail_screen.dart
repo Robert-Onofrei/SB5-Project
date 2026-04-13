@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'attraction_model.dart';
 
 // Screen that displays detailed information about a selected attraction
 class AttractionDetailScreen extends StatefulWidget {
-  const AttractionDetailScreen({super.key});
+  final Attraction attraction;
+
+  const AttractionDetailScreen({super.key, required this.attraction});
 
   @override
   State<AttractionDetailScreen> createState() => _AttractionDetailScreenState();
@@ -36,7 +39,7 @@ class _AttractionDetailScreenState extends State<AttractionDetailScreen> {
               ),
             ],
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text('Spanish Arch'),
+              title: Text(widget.attraction.name),
               // Placeholder until real images are added
               background: Container(
                 color: Colors.grey[400],
@@ -60,17 +63,15 @@ class _AttractionDetailScreenState extends State<AttractionDetailScreen> {
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
-                      'Heritage',
-                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    child: Text(
+                      widget.attraction.category,
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
                     ),
                   ),
 
                   const SizedBox(height: 12),
                   // Short description of the attraction
-                  const Text(
-                    'Built in 1584, the Spanish Arch is a remnant of the old Galway city walls, located near the River Corrib.',
-                  ),
+                  Text(widget.attraction.description),
 
                   const SizedBox(height: 24),
                   // Details section header
@@ -79,12 +80,18 @@ class _AttractionDetailScreenState extends State<AttractionDetailScreen> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const Divider(),
-                  // Mock detail rows, will be replaced with real data from API
-                  _buildDetailRow('Location', 'Spanish Parade, Galway'),
+                  _buildDetailRow('Location', widget.attraction.location),
                   const Divider(),
-                  _buildDetailRow('Category', 'Heritage'),
+                  _buildDetailRow('Category', widget.attraction.category),
                   const Divider(),
-                  _buildDetailRow('Built', '1584'),
+                  _buildDetailRow('Built', widget.attraction.built),
+                  const Divider(),
+                  _buildDetailRow(
+                    'Opening Hours',
+                    widget.attraction.openingHours,
+                  ),
+                  const Divider(),
+                  _buildDetailRow('Admission', widget.attraction.admission),
                 ],
               ),
             ),
@@ -95,17 +102,16 @@ class _AttractionDetailScreenState extends State<AttractionDetailScreen> {
   }
 
   // Builds a single detail row with a label and value
-Widget _buildDetailRow(String label, String value) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(label, style: const TextStyle(color: Colors.grey)),
-        Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
-      ],
-    ),
-  );
-}
-
+  Widget _buildDetailRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label, style: const TextStyle(color: Colors.grey)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
 }
