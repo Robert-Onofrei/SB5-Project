@@ -36,6 +36,26 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 24),
+              const Text(
+                'Discover Nearby',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 12),
+              Card(
+                clipBehavior: Clip.antiAlias,
+                child: ListTile(
+                  leading: const Icon(Icons.map),
+                  title: const Text(
+                    'View On Map',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: const Text('All Pinned Locations'),
+                  onTap: () {
+                    // Map screen navigation will go here
+                  },
+                ),
+              ),
             ],
           ),
         ),
