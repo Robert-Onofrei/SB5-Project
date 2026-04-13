@@ -20,7 +20,7 @@ class BottomNavBar extends StatelessWidget {
       onTap: onTap,
       selectedItemColor: Colors.green,
       unselectedItemColor: Colors.grey,
-      // Navigation tabs for the app
+      // Navigation tabs for the apps
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Trails'),
