@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'trail_detail_screen.dart';
 import 'trail_model.dart';
+import 'bottom_nav_bar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class HomeScreen extends StatelessWidget {
               ...mockTrails.map(
                 (trail) => Column(
                   children: [
-                    _buildTrailCard(context, trail),
+                    _buildTrailCard(trail),
                     const SizedBox(height: 12),
                   ],
                 ),
@@ -60,10 +68,18 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
     );
   }
 
-  Widget _buildTrailCard(BuildContext context, Trail trail) {
+  Widget _buildTrailCard(Trail trail) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
