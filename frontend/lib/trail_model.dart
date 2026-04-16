@@ -2,10 +2,14 @@
 class TrailStop {
   final String name;
   final String description;
+  final double latitude;
+  final double longitude;
 
   const TrailStop({
     required this.name,
     required this.description,
+    required this.latitude,
+    required this.longitude,
   });
 }
 
@@ -38,11 +42,11 @@ final List<Trail> mockTrails = [
     description:
         'The Latin Quarter Trail takes you through the heart of Galway city, exploring its rich cultural heritage, medieval architecture, and vibrant street life.',
     stops: [
-      TrailStop(name: 'Spanish Arch', description: 'Historic 16th century arch on the River Corrib'),
-      TrailStop(name: 'Galway City Museum', description: 'Explore Galway\'s history and culture'),
-      TrailStop(name: 'Church of St. Nicholas', description: 'Medieval collegiate church dating to 1320'),
-      TrailStop(name: 'Shop Street', description: 'The heart of Galway\'s social and cultural life'),
-      TrailStop(name: 'Eyre Square', description: 'Central park and gateway to the city'),
+      TrailStop(name: 'Spanish Arch', description: 'Historic 16th century arch on the River Corrib', latitude: 53.2696, longitude: -9.0536),
+      TrailStop(name: 'Galway City Museum', description: 'Explore Galway\'s history and culture', latitude: 53.2698, longitude: -9.0530),
+      TrailStop(name: 'Church of St. Nicholas', description: 'Medieval collegiate church dating to 1320', latitude: 53.2720, longitude: -9.0530),
+      TrailStop(name: 'Shop Street', description: 'The heart of Galway\'s social and cultural life', latitude: 53.2726, longitude: -9.0527),
+      TrailStop(name: 'Eyre Square', description: 'Central park and gateway to the city', latitude: 53.2743, longitude: -9.0490),
     ],
   ),
   Trail(
@@ -53,11 +57,11 @@ final List<Trail> mockTrails = [
     description:
         'Explore the best of Galway city on this trail, taking in the main landmarks and hidden gems of this vibrant Irish city.',
     stops: [
-      TrailStop(name: 'Eyre Square', description: 'Central park and gateway to the city'),
-      TrailStop(name: 'Galway Cathedral', description: 'One of the last great stone cathedrals built in the western world'),
-      TrailStop(name: 'Salmon Weir Bridge', description: 'Watch salmon leap upstream on the River Corrib'),
-      TrailStop(name: 'The Long Walk', description: 'Scenic waterfront walk along the River Corrib'),
-      TrailStop(name: 'Claddagh', description: 'Historic fishing village and birthplace of the Claddagh ring'),
+      TrailStop(name: 'Eyre Square', description: 'Central park and gateway to the city', latitude: 53.2743, longitude: -9.0490),
+      TrailStop(name: 'Galway Cathedral', description: 'One of the last great stone cathedrals built in the western world', latitude: 53.2753, longitude: -9.0592),
+      TrailStop(name: 'Salmon Weir Bridge', description: 'Watch salmon leap upstream on the River Corrib', latitude: 53.2748, longitude: -9.0575),
+      TrailStop(name: 'The Long Walk', description: 'Scenic waterfront walk along the River Corrib', latitude: 53.2690, longitude: -9.0500),
+      TrailStop(name: 'Claddagh', description: 'Historic fishing village and birthplace of the Claddagh ring', latitude: 53.2670, longitude: -9.0540),
     ],
   ),
   Trail(
@@ -68,10 +72,10 @@ final List<Trail> mockTrails = [
     description:
         'A scenic coastal trail along the famous Salthill promenade, with stunning views of Galway Bay and the Burren.',
     stops: [
-      TrailStop(name: 'Salthill Promenade', description: 'Famous seaside promenade stretching 2km along Galway Bay'),
-      TrailStop(name: 'Blackrock Diving Board', description: 'Iconic diving board and swimming spot'),
-      TrailStop(name: 'Galway Lawn Tennis Club', description: 'Historic tennis club founded in 1890'),
-      TrailStop(name: 'Salthill Park', description: 'Beautiful park with views over Galway Bay'),
+      TrailStop(name: 'Salthill Promenade', description: 'Famous seaside promenade stretching 2km along Galway Bay', latitude: 53.2590, longitude: -9.0780),
+      TrailStop(name: 'Blackrock Diving Board', description: 'Iconic diving board and swimming spot', latitude: 53.2560, longitude: -9.0890),
+      TrailStop(name: 'Galway Lawn Tennis Club', description: 'Historic tennis club founded in 1890', latitude: 53.2580, longitude: -9.0830),
+      TrailStop(name: 'Salthill Park', description: 'Beautiful park with views over Galway Bay', latitude: 53.2575, longitude: -9.0850),
     ],
   ),
 ];
