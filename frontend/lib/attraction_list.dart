@@ -107,10 +107,14 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+onTap: (index) {
+          if (index == 0) {
+            Navigator.pop(context);
+          } else {
+            setState(() {
+              _selectedIndex = index;
+            });
+          }
         },
       ),
     );
