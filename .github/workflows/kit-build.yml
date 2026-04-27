@@ -1,0 +1,56 @@
+name: Kit Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  node-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install backend dependencies
+        run: npm install
+        working-directory: ./backend
+
+      - name: Build backend
+        run: npm run build --if-present
+        working-directory: ./backend
+
+      - name: Test backend
+        run: npm test --if-present
+        working-directory: ./backend
+
+  flutter-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.41.4'
+
+      - name: Install frontend dependencies
+        run: flutter pub get
+        working-directory: ./frontend
+
+      - name: Analyze frontend
+        run: flutter analyze
+        working-directory: ./frontend
+
+      - name: Run frontend tests
+        run: flutter test
+        working-directory: ./frontend
