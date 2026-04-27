@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'trail_model.dart';
+import 'attraction_model.dart';
+import 'attraction_detail_screen.dart';
 
 class TrailDetailScreen extends StatefulWidget {
   final Trail trail;
@@ -109,33 +111,44 @@ class _TrailDetailScreenState extends State<TrailDetailScreen> {
   }
 
   // Builds a single stop item with a tappable numbered circle
-  Widget _buildStop(int number, String name, String description, int index) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Tappable circle that turns orange when stop is completed
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                completedStops[index] = !completedStops[index];
-              });
-            },
-            child: CircleAvatar(
-              radius: 14,
-              backgroundColor: completedStops[index]
-                  ? Colors.orange
-                  : Colors.grey,
-              child: Text(
-                '$number',
-                style: const TextStyle(color: Colors.white),
-              ),
+Widget _buildStop(int number, String name, String description, int index) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Tappable circle that turns orange when stop is completed
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              completedStops[index] = !completedStops[index];
+            });
+          },
+          child: CircleAvatar(
+            radius: 14,
+            backgroundColor: completedStops[index] ? Colors.orange : Colors.grey,
+            child: Text(
+              '$number',
+              style: const TextStyle(color: Colors.white),
             ),
           ),
-
-          const SizedBox(width: 12),
-          Expanded(
+        ),
+        const SizedBox(width: 12),
+        // Tappable text that navigates to the attraction detail page
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              final attraction = mockAttractions.firstWhere(
+                (a) => a.name == name,
+                orElse: () => mockAttractions[0],
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AttractionDetailScreen(attraction: attraction),
+                ),
+              );
+            },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -144,8 +157,9 @@ class _TrailDetailScreenState extends State<TrailDetailScreen> {
               ],
             ),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 }
