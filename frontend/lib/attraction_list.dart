@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'attraction_model.dart';
 import 'bottom_nav_bar.dart';
+import 'attraction_detail_screen.dart';
 
 // Main screen for displaying and searching attractions
 class AttractionsScreen extends StatefulWidget {
@@ -126,60 +127,16 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
         ),
         subtitle: Text('${attraction.category} • ${attraction.location}'),
         trailing: const Icon(Icons.chevron_right),
-        onTap: () {
-          _showAttractionDetails(attraction);
+onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AttractionDetailScreen(attraction: attraction),
+            ),
+          );
         },
       ),
     );
   }
 
-void _showAttractionDetails(Attraction attraction) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    builder: (context) {
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              attraction.name,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text('Category: ${attraction.category}'),
-
-            const SizedBox(height: 8),
-            Text('Location: ${attraction.location}'),
-            const SizedBox(height: 4),
-
-            Text('Built: ${attraction.built}'),
-            const SizedBox(height: 8),
-
-            Text('Opening Hours: ${attraction.openingHours}'),
-            const SizedBox(height: 8),
-
-            Text('Admission: ${attraction.admission}'),
-            const SizedBox(height: 12),
-
-            Text(
-              attraction.description,
-              style: const TextStyle(height: 1.4),
-            ),
-
-            const SizedBox(height: 20),
-            ],
-          ),
-       );
-     },
-   );
-  }
 }
