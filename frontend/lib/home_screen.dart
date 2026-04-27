@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'trail_detail_screen.dart';
 import 'trail_model.dart';
 import 'bottom_nav_bar.dart';
+import 'attraction_list.dart';
+import 'attraction_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -71,10 +73,29 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+          if (index == _selectedIndex) return;
+
+          if (index == 0) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          }
+          else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AttractionsScreen(
+                  attractions: mockAttractions,
+                ),
+              ),
+            );
+          }
+          else{
+            setState(() {
+              _selectedIndex = index;
+            });
+          }
+        }
       ),
     );
   }
