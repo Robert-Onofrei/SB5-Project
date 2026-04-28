@@ -75,7 +75,6 @@ class MapScreen extends StatelessWidget {
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text('${attraction.category} . Tap for details'),
-                    trailing: const Icon(Icons.favorite, color: Colors.red),
                     onTap: () {
                       Navigator.push(
                         context,
