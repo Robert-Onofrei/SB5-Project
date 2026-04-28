@@ -203,7 +203,7 @@ class _FoodScreenState extends State<FoodScreen> {
                 const Icon(Icons.star, size: 14, color: Colors.amber),
                 const SizedBox(width: 4),
                 Text(
-                  venue.rating.toString(),
+                  venue.rating.toStringAsFixed(1),
                   style: const TextStyle(fontSize: 13),
                 ),
                 const SizedBox(width: 8),
