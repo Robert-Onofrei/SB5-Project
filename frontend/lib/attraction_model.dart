@@ -7,7 +7,11 @@ class Attraction {
   final String built;
   final String openingHours;
   final String admission;
+  // Path to the attraction's image asset
   final String imagePath;
+  // Coordinates for map display
+  final double latitude;
+  final double longitude;
 
   const Attraction({
     required this.name,
@@ -18,6 +22,8 @@ class Attraction {
     required this.openingHours,
     required this.admission,
     required this.imagePath,
+    required this.latitude,
+    required this.longitude,
   });
 }
 
@@ -31,6 +37,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Open 24 hours',
     admission: 'Free',
     imagePath: 'assets/images/attractions/spanish_arch.jpg',
+    latitude: 53.2696,
+    longitude: -9.0536,
   ),
   Attraction(
     name: 'Galway City Museum',
@@ -41,6 +49,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Tue - Sat: 10am - 5pm',
     admission: 'Free',
     imagePath: 'assets/images/attractions/museum.jpg',
+    latitude: 53.2698,
+    longitude: -9.0530,
   ),
   Attraction(
     name: 'Church of St. Nicholas',
@@ -51,8 +61,9 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Mon - Sat: 9am - 5pm, Sun: 1pm - 5pm',
     admission: 'Free',
     imagePath: 'assets/images/attractions/church.jpg',
+    latitude: 53.2720,
+    longitude: -9.0530,
   ),
-
   Attraction(
     name: 'Eyre Square',
     category: 'Heritage',
@@ -62,6 +73,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Open 24 hours',
     admission: 'Free',
     imagePath: 'assets/images/attractions/eyre_square.jpg',
+    latitude: 53.2743,
+    longitude: -9.0490,
   ),
   Attraction(
     name: 'Shop Street',
@@ -72,6 +85,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Open 24 hours',
     admission: 'Free',
     imagePath: 'assets/images/attractions/shop_street.jpg',
+    latitude: 53.2726,
+    longitude: -9.0527,
   ),
   Attraction(
     name: 'Galway Cathedral',
@@ -82,6 +97,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Mon - Sun: 8am - 6:30pm',
     admission: 'Free',
     imagePath: 'assets/images/attractions/cathedral.jpeg',
+    latitude: 53.2753,
+    longitude: -9.0592,
   ),
   Attraction(
     name: 'Salmon Weir Bridge',
@@ -92,6 +109,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Open 24 hours',
     admission: 'Free',
     imagePath: 'assets/images/attractions/bridge.jpeg',
+    latitude: 53.2748,
+    longitude: -9.0575,
   ),
   Attraction(
     name: 'The Long Walk',
@@ -102,6 +121,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Open 24 hours',
     admission: 'Free',
     imagePath: 'assets/images/attractions/long_walk.jpg',
+    latitude: 53.2690,
+    longitude: -9.0500,
   ),
   Attraction(
     name: 'Claddagh',
@@ -112,6 +133,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Open 24 hours',
     admission: 'Free',
     imagePath: 'assets/images/attractions/claddagh.jpg',
+    latitude: 53.2670,
+    longitude: -9.0540,
   ),
   Attraction(
     name: 'Salthill Promenade',
@@ -122,6 +145,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Open 24 hours',
     admission: 'Free',
     imagePath: 'assets/images/attractions/prom.jpg',
+    latitude: 53.2590,
+    longitude: -9.0780,
   ),
   Attraction(
     name: 'Blackrock Diving Board',
@@ -132,6 +157,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Open 24 hours',
     admission: 'Free',
     imagePath: 'assets/images/attractions/blackrock.jpeg',
+    latitude: 53.2560,
+    longitude: -9.0890,
   ),
   Attraction(
     name: 'Galway Lawn Tennis Club',
@@ -142,6 +169,8 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Mon - Sun: 8am - 10pm',
     admission: 'Members only',
     imagePath: 'assets/images/attractions/tennis.jpeg',
+    latitude: 53.2580,
+    longitude: -9.0830,
   ),
   Attraction(
     name: 'Salthill Park',
@@ -152,6 +181,7 @@ final List<Attraction> mockAttractions = [
     openingHours: 'Open 24 hours',
     admission: 'Free',
     imagePath: 'assets/images/attractions/park.webp',
+    latitude: 53.2575,
+    longitude: -9.0850,
   ),
-
 ];

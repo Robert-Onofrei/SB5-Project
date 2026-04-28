@@ -4,6 +4,8 @@ import 'trail_model.dart';
 import 'bottom_nav_bar.dart';
 import 'attraction_list.dart';
 import 'attraction_model.dart';
+import 'map_screen.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -62,7 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   subtitle: const Text('All Pinned Locations'),
                   onTap: () {
-                    // Map screen navigation will go here
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MapScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -83,8 +90,22 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
+<<<<<<< HEAD
                 builder: (context) =>
                     AttractionsScreen(attractions: mockAttractions),
+=======
+                builder: (context) => AttractionsScreen(
+                  attractions: mockAttractions,
+                ),
+              ),
+            );
+          }
+          else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const FoodScreen(),
+>>>>>>> c8343a81be00545a3cf32987f0c6faa14884297b
               ),
             );
           } else {
@@ -92,7 +113,32 @@ class _HomeScreenState extends State<HomeScreen> {
               _selectedIndex = index;
             });
           }
+<<<<<<< HEAD
         },
+=======
+          else if (index == 4) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MapScreen(),
+              ),
+            );
+          }
+          else if (index == 5) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
+              ),
+            );
+          }
+          else {
+            setState(() {
+              _selectedIndex = index;
+            });
+          }
+        }
+>>>>>>> c8343a81be00545a3cf32987f0c6faa14884297b
       ),
     );
   }
