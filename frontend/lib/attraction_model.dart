@@ -7,6 +7,8 @@ class Attraction {
   final String built;
   final String openingHours;
   final String admission;
+  final double latitude;
+  final double longitude;
 
   const Attraction({
     required this.name,
@@ -16,6 +18,8 @@ class Attraction {
     required this.built,
     required this.openingHours,
     required this.admission,
+    required this.latitude,
+    required this.longitude,
   });
 }
 
@@ -28,6 +32,8 @@ final List<Attraction> mockAttractions = [
     built: '1584',
     openingHours: 'Open 24 hours',
     admission: 'Free',
+    latitude: 53.2696,
+    longitude: -9.0536,
   ),
   Attraction(
     name: 'Galway City Museum',
@@ -37,6 +43,8 @@ final List<Attraction> mockAttractions = [
     built: '2006',
     openingHours: 'Tue - Sat: 10am - 5pm',
     admission: 'Free',
+    latitude: 53.2698,
+    longitude: -9.0530,
   ),
   Attraction(
     name: 'Church of St. Nicholas',
@@ -46,5 +54,7 @@ final List<Attraction> mockAttractions = [
     built: '1320',
     openingHours: 'Mon - Sat: 9am - 5pm, Sun: 1pm - 5pm',
     admission: 'Free',
+    latitude: 53.2720,
+    longitude: -9.0530,
   ),
 ];

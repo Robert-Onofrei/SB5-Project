@@ -5,6 +5,7 @@ import 'bottom_nav_bar.dart';
 import 'attraction_list.dart';
 import 'food_screen.dart';
 import 'attraction_model.dart';
+import 'map_screen.dart';
 import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -64,7 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   subtitle: const Text('All Pinned Locations'),
                   onTap: () {
-                    // Map screen navigation will go here
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MapScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -91,11 +97,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             );
-          } else if (index == 3) {
+          }
+          else if (index == 3) {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const FoodScreen(),
+              ),
+            );
+          }
+          else if (index == 4) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MapScreen(),
               ),
             );
           }
@@ -106,6 +121,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context) => const ProfileScreen(),
               ),
             );
+          }
+          else {
+            setState(() {
+              _selectedIndex = index;
+            });
           }
         }
       ),
