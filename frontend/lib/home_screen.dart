@@ -5,6 +5,7 @@ import 'bottom_nav_bar.dart';
 import 'attraction_list.dart';
 import 'food_screen.dart';
 import 'attraction_model.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -95,6 +96,14 @@ class _HomeScreenState extends State<HomeScreen> {
               context,
               MaterialPageRoute(
                 builder: (context) => const FoodScreen(),
+              ),
+            );
+          }
+          else if (index == 5) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
               ),
             );
           }
