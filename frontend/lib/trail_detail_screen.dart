@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'trail_model.dart';
+import 'trail_map_screen.dart';
 import 'attraction_model.dart';
 import 'attraction_detail_screen.dart';
 
@@ -96,10 +97,16 @@ class _TrailDetailScreenState extends State<TrailDetailScreen> {
         ],
       ),
       // Fixed bottom button to navigate to map view
-      bottomNavigationBar: Padding(
+     bottomNavigationBar: Padding(
         padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 32.0),
         child: ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+          builder: (context) => TrailMapScreen(trail: widget.trail),              ),
+            );
+          },
           icon: const Icon(Icons.map),
           label: const Text('View on Map'),
           style: ElevatedButton.styleFrom(
