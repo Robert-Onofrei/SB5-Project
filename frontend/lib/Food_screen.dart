@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'food_model.dart';
 import 'bottom_nav_bar.dart';
+import 'attraction_list.dart';
+import 'attraction_model.dart';
 
 // Screen displaying popular food venues in Galway
 class FoodScreen extends StatefulWidget {
@@ -102,11 +104,22 @@ class _FoodScreenState extends State<FoodScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBar(
+bottomNavigationBar: BottomNavBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
           if (index == 0) {
+            // Navigate back to home
             Navigator.pop(context);
+          } else if (index == 2) {
+            // Navigate to attractions screen
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AttractionsScreen(
+                  attractions: mockAttractions,
+                ),
+              ),
+            );
           } else {
             setState(() {
               _selectedIndex = index;
