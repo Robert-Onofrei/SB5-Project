@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'trail_model.dart';
 import 'trail_map_screen.dart';
+import 'attraction_model.dart';
+import 'attraction_detail_screen.dart';
 
-// Screen that displays detailed information about a selected trail
-// Accepts a Trail object passed from the home screen
-class TrailDetailScreen extends StatelessWidget {
+class TrailDetailScreen extends StatefulWidget {
   final Trail trail;
 
-  const TrailDetailScreen({
-    super.key,
-    required this.trail,
-  });
+  const TrailDetailScreen({super.key, required this.trail});
+
+  @override
+  State<TrailDetailScreen> createState() => _TrailDetailScreenState();
+}
+
+class _TrailDetailScreenState extends State<TrailDetailScreen> {
+  // Tracks which stops the user has completed
+  List<bool> completedStops = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialise all stops as not completed
+    completedStops = List.filled(widget.trail.stops.length, false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +35,7 @@ class TrailDetailScreen extends StatelessWidget {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               // Trail name from the model
-              title: Text(trail.name),
+              title: Text(widget.trail.name),
               // Placeholder until real images are added
               background: Container(
                 color: Colors.grey[400],
@@ -42,15 +54,15 @@ class TrailDetailScreen extends StatelessWidget {
                     children: [
                       const Icon(Icons.place, size: 16),
                       const SizedBox(width: 4),
-                      Text('${trail.numberOfStops} stops'),
+                      Text('${widget.trail.numberOfStops} stops'),
                       const SizedBox(width: 16),
                       const Icon(Icons.straighten, size: 16),
                       const SizedBox(width: 4),
-                      Text(trail.distance),
+                      Text(widget.trail.distance),
                       const SizedBox(width: 16),
                       const Icon(Icons.access_time, size: 16),
                       const SizedBox(width: 4),
-                      Text(trail.duration),
+                      Text(widget.trail.duration),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -61,7 +73,7 @@ class TrailDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   // Trail description from the model
-                  Text(trail.description),
+                  Text(widget.trail.description),
                   const SizedBox(height: 24),
                   // Stops section header
                   const Text(
@@ -70,11 +82,12 @@ class TrailDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   // Build a stop item for each stop in the model
-                  ...trail.stops.asMap().entries.map((entry) {
+                  ...widget.trail.stops.asMap().entries.map((entry) {
                     return _buildStop(
                       entry.key + 1,
                       entry.value.name,
                       entry.value.description,
+                      entry.key,
                     );
                   }),
                 ],
@@ -91,8 +104,7 @@ class TrailDetailScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => TrailMapScreen(trail: trail),
-              ),
+          builder: (context) => TrailMapScreen(trail: widget.trail),              ),
             );
           },
           icon: const Icon(Icons.map),
@@ -105,20 +117,45 @@ class TrailDetailScreen extends StatelessWidget {
     );
   }
 
-  // Builds a single stop item with a numbered circle avatar and description
-  Widget _buildStop(int number, String name, String description) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Numbered circle for stop order
-          CircleAvatar(
+  // Builds a single stop item with a tappable numbered circle
+Widget _buildStop(int number, String name, String description, int index) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Tappable circle that turns orange when stop is completed
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              completedStops[index] = !completedStops[index];
+            });
+          },
+          child: CircleAvatar(
             radius: 14,
-            child: Text('$number'),
+            backgroundColor: completedStops[index] ? Colors.orange : Colors.grey,
+            child: Text(
+              '$number',
+              style: const TextStyle(color: Colors.white),
+            ),
           ),
-          const SizedBox(width: 12),
-          Expanded(
+        ),
+        const SizedBox(width: 12),
+        // Tappable text that navigates to the attraction detail page
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              final attraction = mockAttractions.firstWhere(
+                (a) => a.name == name,
+                orElse: () => mockAttractions[0],
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AttractionDetailScreen(attraction: attraction),
+                ),
+              );
+            },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -127,8 +164,9 @@ class TrailDetailScreen extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 }
