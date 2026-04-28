@@ -3,8 +3,10 @@ import 'trail_detail_screen.dart';
 import 'trail_model.dart';
 import 'bottom_nav_bar.dart';
 import 'attraction_list.dart';
+import 'food_screen.dart';
 import 'attraction_model.dart';
 import 'map_screen.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -96,11 +98,27 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           }
+          else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const FoodScreen(),
+              ),
+            );
+          }
           else if (index == 4) {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const MapScreen(),
+              ),
+            );
+          }
+          else if (index == 5) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
               ),
             );
           }
