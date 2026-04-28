@@ -35,12 +35,23 @@ class _TrailDetailScreenState extends State<TrailDetailScreen> {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               // Trail name from the model
-              title: Text(widget.trail.name),
-              // Placeholder until real images are added
-              background: Container(
-                color: Colors.grey[400],
-                child: const Icon(Icons.image, size: 80, color: Colors.white),
-              ),
+
+
+              // Show trail image if available, otherwise show placeholder
+              background: widget.trail.imagePath.isNotEmpty
+                  ? Image.asset(
+                      widget.trail.imagePath,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    )
+                  : Container(
+                      color: Colors.grey[400],
+                      child: const Icon(
+                        Icons.image,
+                        size: 80,
+                        color: Colors.white,
+                      ),
+                    ),
             ),
           ),
           SliverToBoxAdapter(
@@ -97,14 +108,15 @@ class _TrailDetailScreenState extends State<TrailDetailScreen> {
         ],
       ),
       // Fixed bottom button to navigate to map view
-     bottomNavigationBar: Padding(
+      bottomNavigationBar: Padding(
         padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 32.0),
         child: ElevatedButton.icon(
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-          builder: (context) => TrailMapScreen(trail: widget.trail),              ),
+                builder: (context) => TrailMapScreen(trail: widget.trail),
+              ),
             );
           },
           icon: const Icon(Icons.map),
@@ -118,55 +130,61 @@ class _TrailDetailScreenState extends State<TrailDetailScreen> {
   }
 
   // Builds a single stop item with a tappable numbered circle
-Widget _buildStop(int number, String name, String description, int index) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Tappable circle that turns orange when stop is completed
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              completedStops[index] = !completedStops[index];
-            });
-          },
-          child: CircleAvatar(
-            radius: 14,
-            backgroundColor: completedStops[index] ? Colors.orange : Colors.grey,
-            child: Text(
-              '$number',
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        // Tappable text that navigates to the attraction detail page
-        Expanded(
-          child: GestureDetector(
+  Widget _buildStop(int number, String name, String description, int index) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Tappable circle that turns orange when stop is completed
+          GestureDetector(
             onTap: () {
-              final attraction = mockAttractions.firstWhere(
-                (a) => a.name == name,
-                orElse: () => mockAttractions[0],
-              );
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AttractionDetailScreen(attraction: attraction),
-                ),
-              );
+              setState(() {
+                completedStops[index] = !completedStops[index];
+              });
             },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                Text(description, style: const TextStyle(color: Colors.grey)),
-              ],
+            child: CircleAvatar(
+              radius: 14,
+              backgroundColor: completedStops[index]
+                  ? Colors.orange
+                  : Colors.grey,
+              child: Text(
+                '$number',
+                style: const TextStyle(color: Colors.white),
+              ),
             ),
           ),
-        ),
-      ],
-    ),
-  );
-}
+          const SizedBox(width: 12),
+          // Tappable text that navigates to the attraction detail page
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                final attraction = mockAttractions.firstWhere(
+                  (a) => a.name == name,
+                  orElse: () => mockAttractions[0],
+                );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        AttractionDetailScreen(attraction: attraction),
+                  ),
+                );
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(description, style: const TextStyle(color: Colors.grey)),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -39,12 +39,21 @@ class _AttractionDetailScreenState extends State<AttractionDetailScreen> {
               ),
             ],
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(widget.attraction.name),
-              // Placeholder until real images are added
-              background: Container(
-                color: Colors.grey[400],
-                child: const Icon(Icons.image, size: 80, color: Colors.white),
-              ),
+              // Show attraction image if available, otherwise show placeholder
+              background: widget.attraction.imagePath.isNotEmpty
+                  ? Image.asset(
+                      widget.attraction.imagePath,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    )
+                  : Container(
+                      color: Colors.grey[400],
+                      child: const Icon(
+                        Icons.image,
+                        size: 80,
+                        color: Colors.white,
+                      ),
+                    ),
             ),
           ),
 

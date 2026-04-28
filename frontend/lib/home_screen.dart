@@ -3,8 +3,8 @@ import 'trail_detail_screen.dart';
 import 'trail_model.dart';
 import 'bottom_nav_bar.dart';
 import 'attraction_list.dart';
-import 'food_screen.dart';
 import 'attraction_model.dart';
+import 'food_screen.dart';
 import 'map_screen.dart';
 import 'profile_screen.dart';
 
@@ -82,13 +82,11 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _selectedIndex,
         onTap: (index) {
           if (index == _selectedIndex) return;
-
           if (index == 0) {
             setState(() {
               _selectedIndex = index;
             });
-          }
-          else if (index == 2) {
+          } else if (index == 2) {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -97,37 +95,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             );
-          }
-          else if (index == 3) {
+          } else if (index == 3) {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const FoodScreen(),
               ),
             );
-          }
-          else if (index == 4) {
+          } else if (index == 4) {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const MapScreen(),
               ),
             );
-          }
-          else if (index == 5) {
+          } else if (index == 5) {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const ProfileScreen(),
               ),
             );
-          }
-          else {
+          } else {
             setState(() {
               _selectedIndex = index;
             });
           }
-        }
+        },
       ),
     );
   }
@@ -147,12 +141,20 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 120,
-              width: double.infinity,
-              color: Colors.grey[300],
-              child: Icon(Icons.image, size: 40, color: Colors.grey[500]),
-            ),
+            // Show trail image if available, otherwise show placeholder
+            trail.imagePath.isNotEmpty
+                ? Image.asset(
+                    trail.imagePath,
+                    height: 120,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  )
+                : Container(
+                    height: 120,
+                    width: double.infinity,
+                    color: Colors.grey[300],
+                    child: Icon(Icons.image, size: 40, color: Colors.grey[500]),
+                  ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
