@@ -21,6 +21,7 @@ class Trail {
   final int numberOfStops;
   final String description;
   final List<TrailStop> stops;
+  final String imagePath;
 
   const Trail({
     required this.name,
@@ -29,6 +30,7 @@ class Trail {
     required this.numberOfStops,
     required this.description,
     required this.stops,
+    required this.imagePath,
   });
 }
 
@@ -48,6 +50,8 @@ final List<Trail> mockTrails = [
       TrailStop(name: 'Shop Street', description: 'The heart of Galway\'s social and cultural life', latitude: 53.2726, longitude: -9.0527),
       TrailStop(name: 'Eyre Square', description: 'Central park and gateway to the city', latitude: 53.2743, longitude: -9.0490),
     ],
+
+        imagePath: 'assets/images/trails/latin_quarter.jpg',  
   ),
   Trail(
     name: 'Galway City Trail',
@@ -63,7 +67,10 @@ final List<Trail> mockTrails = [
       TrailStop(name: 'The Long Walk', description: 'Scenic waterfront walk along the River Corrib', latitude: 53.2690, longitude: -9.0500),
       TrailStop(name: 'Claddagh', description: 'Historic fishing village and birthplace of the Claddagh ring', latitude: 53.2670, longitude: -9.0540),
     ],
+      imagePath: 'assets/images/trails/galway_city.jpg',
   ),
+
+
   Trail(
     name: 'Salthill Trail',
     distance: '3.5km',
@@ -77,5 +84,8 @@ final List<Trail> mockTrails = [
       TrailStop(name: 'Galway Lawn Tennis Club', description: 'Historic tennis club founded in 1890', latitude: 53.2580, longitude: -9.0830),
       TrailStop(name: 'Salthill Park', description: 'Beautiful park with views over Galway Bay', latitude: 53.2575, longitude: -9.0850),
     ],
+
+     imagePath: 'assets/images/trails/salthill_beach.jpg',
+
   ),
 ];
