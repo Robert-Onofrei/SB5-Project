@@ -65,7 +65,7 @@ FáilteGo uses a three tier architecture. The Flutter mobile app handles all the
 
 - **OneNote:** https://atlantictu-my.sharepoint.com/:o:/r/personal/g00415420_atu_ie/Documents/ProjectManagment/SB5?d=wf632b782682c478387b3c66e87d76b2d&csf=1&web=1&e=gjeND9
 - **Jira:** https://sb5.atlassian.net/jira/software/projects/HELIOS/summary
-- **Demo:** [INSERT LINK]
+- **Demo:** 
 
 ---
 
