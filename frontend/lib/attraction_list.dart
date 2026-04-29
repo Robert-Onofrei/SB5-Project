@@ -5,6 +5,7 @@ import 'attraction_detail_screen.dart';
 import 'food_screen.dart';
 import 'map_screen.dart';
 import 'profile_screen.dart';
+import 'saved_screen.dart';
 
 // Main screen for displaying and searching attractions
 class AttractionsScreen extends StatefulWidget {
@@ -113,7 +114,14 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
 onTap: (index) {
           if (index == 0) {
             Navigator.pop(context);
-          } else if (index == 3) {
+          } else if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SavedScreen(),
+              ),
+            );
+            }else if (index == 3) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(

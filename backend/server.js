@@ -11,6 +11,9 @@ app.use(express.json());
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
+const favouritesRoutes = require("./routes/favourites");
+app.use("/api/favourites", favouritesRoutes);
+
 app.get("/", (req, res) => {
   res.send("FáilteGo API is running");
 });

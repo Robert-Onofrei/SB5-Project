@@ -7,6 +7,7 @@ import 'attraction_model.dart';
 import 'food_screen.dart';
 import 'map_screen.dart';
 import 'profile_screen.dart';
+import 'saved_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -80,12 +81,18 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _selectedIndex,
-        onTap: (index) {
+       onTap: (index) {
           if (index == _selectedIndex) return;
           if (index == 0) {
             setState(() {
               _selectedIndex = index;
             });
+          } else if (index == 1) {
+            // Navigate to saved screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SavedScreen()),
+            );
           } else if (index == 2) {
             Navigator.push(
               context,

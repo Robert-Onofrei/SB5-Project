@@ -5,6 +5,8 @@ import 'attraction_list.dart';
 import 'attraction_model.dart';
 import 'map_screen.dart';
 import 'profile_screen.dart';
+import 'favourites_service.dart';
+import 'saved_screen.dart';
 
 // Screen displaying popular food venues in Galway
 class FoodScreen extends StatefulWidget {
@@ -22,7 +24,22 @@ class _FoodScreenState extends State<FoodScreen> {
   // Currently selected category filter, null means show all
   String? selectedCategory;
   // Tracks which venues the user has favourited
+  // Tracks which venues the user has favourited
   Set<String> favourites = {};
+
+  @override
+  void initState() {
+    super.initState();
+    // Load saved state when screen opens
+    _loadSavedState();
+  }
+
+Future<void> _loadSavedState() async {
+    final saved = await FavouritesService.getAllSaved();
+    setState(() {
+      favourites = saved['savedFood']!.toSet();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,33 +123,35 @@ class _FoodScreenState extends State<FoodScreen> {
           ],
         ),
       ),
-bottomNavigationBar: BottomNavBar(
+      bottomNavigationBar: BottomNavBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
           if (index == 0) {
             Navigator.pop(context);
-          } else if (index == 2) {
+          }else if (index == 1) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => AttractionsScreen(
-                  attractions: mockAttractions,
-                ),
+                builder: (context) => const SavedScreen(),
+              ),
+            );
+           } else if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    AttractionsScreen(attractions: mockAttractions),
               ),
             );
           } else if (index == 4) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
-                builder: (context) => const MapScreen(),
-              ),
+              MaterialPageRoute(builder: (context) => const MapScreen()),
             );
           } else if (index == 5) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
-                builder: (context) => const ProfileScreen(),
-              ),
+              MaterialPageRoute(builder: (context) => const ProfileScreen()),
             );
           } else {
             setState(() {
@@ -195,12 +214,16 @@ bottomNavigationBar: BottomNavBar(
                 ),
                 // Favourite heart button
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await FavouritesService.toggleFood(venue.name);
+                    final saved = await FavouritesService.isFoodSaved(
+                      venue.name,
+                    );
                     setState(() {
-                      if (isFavourited) {
-                        favourites.remove(venue.name);
-                      } else {
+                      if (saved) {
                         favourites.add(venue.name);
+                      } else {
+                        favourites.remove(venue.name);
                       }
                     });
                   },
@@ -216,7 +239,10 @@ bottomNavigationBar: BottomNavBar(
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(20),
