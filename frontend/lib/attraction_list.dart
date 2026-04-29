@@ -30,6 +30,10 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
   Widget build(BuildContext context) {
     // Filter based on search 
     final query = searchText.toLowerCase();
+    final categories = [
+      'All',
+      ...widget.attractions.map((a) => a.category).toSet(),
+    ];
 
     final filteredAttractions = widget.attractions.where((attraction) {
       final name = attraction.name.toLowerCase();
@@ -47,11 +51,6 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
 
       return matchesSearch && matchesCategory;
     }).toList();
-
-    final categories = [
-      'All',
-      ...widget.attractions.map((a) => a.category).toSet(),
-    ];
 
     return Scaffold(
       appBar: AppBar(
