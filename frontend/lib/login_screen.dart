@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'register_screen.dart';
 import 'home_screen.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 // Screen for logging into an existing account
 class LoginScreen extends StatefulWidget {
@@ -27,13 +29,33 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    // TODO: connect to backend when deployed
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
-    );
-  }
+// Call the backend login endpoint
+    try {
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:3000/api/auth/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': email, 'password': password}),
+      );
 
+      final data = jsonDecode(response.body);
+
+if (response.statusCode == 200) {
+        if (!mounted) return;
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      } else {
+        setState(() {
+          errorMessage = data['message'];
+        });
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = 'Could not connect to server';
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
