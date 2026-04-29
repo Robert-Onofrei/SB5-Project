@@ -5,8 +5,8 @@ import 'attraction_list.dart';
 import 'attraction_model.dart';
 import 'map_screen.dart';
 import 'profile_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'favourites_service.dart';
+import 'saved_screen.dart';
 
 // Screen displaying popular food venues in Galway
 class FoodScreen extends StatefulWidget {
@@ -34,11 +34,10 @@ class _FoodScreenState extends State<FoodScreen> {
     _loadSavedState();
   }
 
-  Future<void> _loadSavedState() async {
-    final prefs = await SharedPreferences.getInstance();
-    final saved = prefs.getStringList('saved_food') ?? [];
+Future<void> _loadSavedState() async {
+    final saved = await FavouritesService.getAllSaved();
     setState(() {
-      favourites = saved.toSet();
+      favourites = saved['savedFood']!.toSet();
     });
   }
 
@@ -129,7 +128,14 @@ class _FoodScreenState extends State<FoodScreen> {
         onTap: (index) {
           if (index == 0) {
             Navigator.pop(context);
-          } else if (index == 2) {
+          }else if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SavedScreen(),
+              ),
+            );
+           } else if (index == 2) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'bottom_nav_bar.dart';
 import 'trail_model.dart';
 import 'attraction_model.dart';
@@ -8,6 +7,9 @@ import 'trail_detail_screen.dart';
 import 'attraction_detail_screen.dart';
 import 'food_screen.dart';
 import 'favourites_service.dart';
+import 'attraction_list.dart';
+import 'map_screen.dart';
+import 'profile_screen.dart';
 
 // Screen displaying all saved/favourited items
 class SavedScreen extends StatefulWidget {
@@ -88,11 +90,39 @@ Future<void> _loadSavedItems() async {
                 ],
               ],
             ),
-      bottomNavigationBar: BottomNavBar(
+bottomNavigationBar: BottomNavBar(
         currentIndex: _selectedIndex,
-        onTap: (index) {
+onTap: (index) {
           if (index == 0) {
             Navigator.pop(context);
+          } else if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AttractionsScreen(attractions: mockAttractions),
+              ),
+            );
+          } else if (index == 3) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const FoodScreen(),
+              ),
+            );
+          } else if (index == 4) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MapScreen(),
+              ),
+            );
+          } else if (index == 5) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
+              ),
+            );
           } else {
             setState(() {
               _selectedIndex = index;
