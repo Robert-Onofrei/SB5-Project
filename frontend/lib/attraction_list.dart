@@ -24,19 +24,34 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
   int _selectedIndex = 2;
   final TextEditingController _searchController = TextEditingController();
   String searchText = '';
+  String selectedCategory = 'All';
 
   @override
   Widget build(BuildContext context) {
     // Filter based on search 
+    final query = searchText.toLowerCase();
+
     final filteredAttractions = widget.attractions.where((attraction) {
       final name = attraction.name.toLowerCase();
       final category = attraction.category.toLowerCase();
       final location = attraction.location.toLowerCase();
 
-      return name.contains(searchText.toLowerCase()) ||
-          category.contains(searchText.toLowerCase()) ||
-          location.contains(searchText.toLowerCase());
+      final matchesSearch =
+          name.contains(query) ||
+          category.contains(query) ||
+          location.contains(query);
+
+      final matchesCategory =
+          selectedCategory == 'All' ||
+          attraction.category == selectedCategory;
+
+      return matchesSearch && matchesCategory;
     }).toList();
+
+    final categories = [
+      'All',
+      ...widget.attractions.map((a) => a.category).toSet(),
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -82,6 +97,27 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
                 const SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return ListView(
+                          children: categories.map((cat) {
+                            return ListTile(
+                              title: Text(cat),
+                              trailing: selectedCategory == cat
+                                  ? const Icon(Icons.check)
+                                  : null,
+                              onTap: () {
+                                setState(() {
+                                  selectedCategory = cat;
+                                });
+                                Navigator.pop(context);
+                              },
+                            );
+                          }).toList(),
+                        );
+                      },
+                    );
                   },
                   child: const Text('Filter'),
                 ),
