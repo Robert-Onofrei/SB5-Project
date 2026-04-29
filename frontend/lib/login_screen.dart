@@ -39,7 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
       final data = jsonDecode(response.body);
 
-      if (response.statusCode == 200) {
+if (response.statusCode == 200) {
+        if (!mounted) return;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomeScreen()),

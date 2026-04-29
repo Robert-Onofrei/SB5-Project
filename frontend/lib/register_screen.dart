@@ -42,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-// Call the backend register endpoint
+    // Call the backend register endpoint
     try {
       final response = await http.post(
         Uri.parse('http://10.0.2.2:3000/api/auth/register'),
@@ -53,6 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       final data = jsonDecode(response.body);
 
       if (response.statusCode == 201) {
+        if (!mounted) return;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -68,7 +69,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
     }
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             const SizedBox(height: 32),
             // Email field
-            const Text("Email Address", style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+              "Email Address",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: emailController,
@@ -97,12 +100,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.grey[200],
-                border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(8)),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
             const SizedBox(height: 16),
             // Password field
-            const Text("Password", style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+              "Password",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: passwordController,
@@ -110,7 +119,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.grey[200],
-                border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(8)),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -138,9 +150,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey[900],
                   foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
                 ),
-                child: const Text("Create Account", style: TextStyle(fontSize: 16)),
+                child: const Text(
+                  "Create Account",
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
             ),
             const SizedBox(height: 16),
