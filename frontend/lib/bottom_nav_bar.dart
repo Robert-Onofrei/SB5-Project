@@ -23,7 +23,7 @@ class BottomNavBar extends StatelessWidget {
       // Navigation tabs for the apps
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Trails'),
+        BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Saved'),
         BottomNavigationBarItem(icon: Icon(Icons.place), label: 'Attractions'),
         BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: 'Food'),
         BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
