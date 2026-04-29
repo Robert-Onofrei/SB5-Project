@@ -44,10 +44,11 @@ class _LoginScreenState extends State<LoginScreen> {
         // Store the user ID locally for use across the app
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('userId', data['userId'].toString());
-        if (!context.mounted) return;
+        if (!mounted) return;
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
         );
       } else {
         setState(() {
