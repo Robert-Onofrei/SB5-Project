@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-// Call the backend login endpoint
+    // Call the backend login endpoint
     try {
       final response = await http.post(
         Uri.parse('http://10.0.2.2:3000/api/auth/login'),
@@ -40,10 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
       final data = jsonDecode(response.body);
 
-if (response.statusCode == 200) {
+      if (response.statusCode == 200) {
         // Store the user ID locally for use across the app
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('userId', data['userId']);
+        await prefs.setString('userId', data['userId'].toString());
+        if (!context.mounted) return;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -59,6 +60,7 @@ if (response.statusCode == 200) {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +80,10 @@ if (response.statusCode == 200) {
             ),
             const SizedBox(height: 32),
             // Email field
-            const Text("Email Address", style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+              "Email Address",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: emailController,
@@ -86,12 +91,18 @@ if (response.statusCode == 200) {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.grey[200],
-                border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(8)),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
             const SizedBox(height: 16),
             // Password field
-            const Text("Password", style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+              "Password",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: passwordController,
@@ -99,7 +110,10 @@ if (response.statusCode == 200) {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.grey[200],
-                border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(8)),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -127,7 +141,9 @@ if (response.statusCode == 200) {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey[900],
                   foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
                 ),
                 child: const Text("Login", style: TextStyle(fontSize: 16)),
               ),
@@ -142,7 +158,9 @@ if (response.statusCode == 200) {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => RegisterScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => RegisterScreen(),
+                        ),
                       );
                     },
                     child: const Text("Create Account"),
