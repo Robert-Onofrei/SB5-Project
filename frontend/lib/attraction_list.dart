@@ -3,6 +3,8 @@ import 'attraction_model.dart';
 import 'bottom_nav_bar.dart';
 import 'attraction_detail_screen.dart';
 import 'food_screen.dart';
+import 'map_screen.dart';
+import 'profile_screen.dart';
 
 // Main screen for displaying and searching attractions
 class AttractionsScreen extends StatefulWidget {
@@ -110,14 +112,26 @@ class _AttractionsScreenState extends State<AttractionsScreen> {
         currentIndex: _selectedIndex,
 onTap: (index) {
           if (index == 0) {
-            // Navigate back to home
             Navigator.pop(context);
           } else if (index == 3) {
-            // Navigate to food screen
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => const FoodScreen(),
+              ),
+            );
+          } else if (index == 4) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MapScreen(),
+              ),
+            );
+          } else if (index == 5) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
               ),
             );
           } else {

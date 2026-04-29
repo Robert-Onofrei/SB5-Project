@@ -3,6 +3,8 @@ import 'food_model.dart';
 import 'bottom_nav_bar.dart';
 import 'attraction_list.dart';
 import 'attraction_model.dart';
+import 'map_screen.dart';
+import 'profile_screen.dart';
 
 // Screen displaying popular food venues in Galway
 class FoodScreen extends StatefulWidget {
@@ -108,16 +110,28 @@ bottomNavigationBar: BottomNavBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
           if (index == 0) {
-            // Navigate back to home
             Navigator.pop(context);
           } else if (index == 2) {
-            // Navigate to attractions screen
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => AttractionsScreen(
                   attractions: mockAttractions,
                 ),
+              ),
+            );
+          } else if (index == 4) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MapScreen(),
+              ),
+            );
+          } else if (index == 5) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
               ),
             );
           } else {
