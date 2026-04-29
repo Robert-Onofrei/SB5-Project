@@ -41,7 +41,6 @@ class _LoginScreenState extends State<LoginScreen> {
       final data = jsonDecode(response.body);
 
 if (response.statusCode == 200) {
-        if (!mounted) return;
         // Store the user ID locally for use across the app
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('userId', data['userId']);
