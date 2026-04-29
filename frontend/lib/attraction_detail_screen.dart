@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'attraction_model.dart';
+import 'favourites_service.dart';
 
 // Screen that displays detailed information about a selected attraction
 class AttractionDetailScreen extends StatefulWidget {
@@ -14,6 +15,22 @@ class AttractionDetailScreen extends StatefulWidget {
 class _AttractionDetailScreenState extends State<AttractionDetailScreen> {
   // Tracks whether the user has favourited this attraction
   bool isFavourited = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Load saved state when screen opens
+    _loadSavedState();
+  }
+
+  Future<void> _loadSavedState() async {
+    final saved = await FavouritesService.isAttractionSaved(
+      widget.attraction.name,
+    );
+    setState(() {
+      isFavourited = saved;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,20 +48,32 @@ class _AttractionDetailScreenState extends State<AttractionDetailScreen> {
                   isFavourited ? Icons.favorite : Icons.favorite_border,
                   color: isFavourited ? Colors.red : Colors.white,
                 ),
-                onPressed: () {
+                onPressed: () async {
+                  final result = await FavouritesService.toggleAttraction(
+                    widget.attraction.name,
+                  );
                   setState(() {
-                    isFavourited = !isFavourited;
+                    isFavourited = result;
                   });
                 },
               ),
             ],
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(widget.attraction.name),
-              // Placeholder until real images are added
-              background: Container(
-                color: Colors.grey[400],
-                child: const Icon(Icons.image, size: 80, color: Colors.white),
-              ),
+              // Show attraction image if available, otherwise show placeholder
+              background: widget.attraction.imagePath.isNotEmpty
+                  ? Image.asset(
+                      widget.attraction.imagePath,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    )
+                  : Container(
+                      color: Colors.grey[400],
+                      child: const Icon(
+                        Icons.image,
+                        size: 80,
+                        color: Colors.white,
+                      ),
+                    ),
             ),
           ),
 
