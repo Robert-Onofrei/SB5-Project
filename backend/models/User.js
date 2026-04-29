@@ -21,10 +21,9 @@ const userSchema = new mongoose.Schema({
 });
 
 // Hash the password before saving to the database
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 10);
-  next();
 });
 
 // Method to check if a password matches the stored hash

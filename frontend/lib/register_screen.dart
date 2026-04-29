@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 // Screen for creating a new account
 class RegisterScreen extends StatefulWidget {
@@ -40,12 +42,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-    // TODO: connect to backend when deployed
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
+// Call the backend register endpoint
+    try {
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:3000/api/auth/register'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': email, 'password': password}),
+      );
+
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 201) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+        );
+      } else {
+        setState(() {
+          errorMessage = data['message'];
+        });
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = 'Could not connect to server';
+      });
+    }
   }
+  
 
   @override
   Widget build(BuildContext context) {
