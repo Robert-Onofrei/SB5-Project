@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'register_screen.dart';
 import 'home_screen.dart';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 // Screen for logging into an existing account
@@ -41,6 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
 if (response.statusCode == 200) {
         if (!mounted) return;
+        // Store the user ID locally for use across the app
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('userId', data['userId']);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomeScreen()),

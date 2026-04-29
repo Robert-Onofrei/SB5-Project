@@ -18,6 +18,9 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  savedTrails: [{ type: String }],
+  savedAttractions: [{ type: String }],
+  savedFood: [{ type: String }],
 });
 
 // Hash the password before saving to the database
