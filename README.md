@@ -1,22 +1,74 @@
-# SB5-Project
 # FáilteGo
 
-FáilteGo is a tourism app built to help users explore Galway’s cultural attractions, heritage sites, and local trails.
+**Discover the Galway you didn't know was there.**
 
-This project uses:
-- **Flutter** for the mobile frontend
-- **Node.js + Express** for the backend
-- **MongoDB Atlas** for the database
+FáilteGo is a mobile tourism app designed to help tourists discover the deeper cultural side of Galway. Visitors often miss hidden gems because information is spread across different platforms. FáilteGo brings it all together in a single app with curated cultural trails, interactive maps and attraction discovery.
 
 ---
 
-## What You Need Before Running the Project
+## Problem Statement and Target Users
 
-Make sure you have these installed on your computer:
+Tourists visiting Galway rely on scattered websites, outdated brochures and generic search results to plan their trips. There's no single app that brings together cultural trails, heritage sites and local attractions in one place with map based navigation.
 
-### Required Software
-- **Git** - Look up GIT in a browser to install.
-- **Flutter SDK** - to download flutter SDK. Go into VS Code, go to extenstions, install flutter. You will then be prompted a popup asking where to install the SDK. It must be done at the base level of the ssd / hdd. So select which drive I would recommend where the OS is installed.
-- **Node.js** - Look up Node in a browser to install
-- **VS Code** or another code editor
-- **Android Studio** with Android SDK and emulator - to install look up Android Studio. There are extras required to install with Android Studio when you are prompted. To figure out which. When flutter is installed, in vscode terminal run "flutter doctor --android-licenses", and "flutter doctor" you will be presented with missing components you will need 
+**Target users:** Tourists and visitors who want to explore Galway beyond the standard travel guides.
+
+---
+
+## Key Features Implemented
+
+- Home page with cultural trail cards and discover nearby section
+- Interactive trail maps using OpenStreetMap with pinned stops and route lines
+- Trail detail screens with stop descriptions and progress tracking
+- Mark trail stops as visited
+- Attraction browsing with search and category filtering
+- No search results handling when nothing matches
+- Food and drink page with venue cards, search and category filters
+- User registration with email format validation
+- Login screen
+- Profile screen with logout
+- Map view showing all pinned attraction locations across Galway
+- Historical information at locations
+- Saving favourites
+
+---
+
+## Architecture Overview
+
+FáilteGo uses a three tier architecture. The Flutter mobile app handles all the UI and map rendering on the client side. It communicates with a Node.js Express backend through REST API calls. The backend handles user authentication using bcryptjs for password hashing and jsonwebtoken for session management. User data is stored in a MongoDB Atlas cloud database connected through Mongoose.
+
+---
+
+## Technology Stack
+
+| Layer | Technologies |
+|-------|-------------|
+| Frontend | Flutter (Dart), flutter_map, latlong2, OpenStreetMap tiles |
+| Backend | Node.js, Express |
+| Database | MongoDB Atlas, Mongoose |
+| Authentication | bcryptjs, jsonwebtoken |
+| CI | GitHub Actions |
+
+---
+
+## Team Members and Scrum Roles
+
+| Name | Student ID | Role |
+|------|-----------|------|
+| Fionn Qualter | G00428202 | Scrum Master |
+| Nusrathara Hanif | G00415420 | Product Owner |
+| Robert Onofrei | G00432495 | Developer |
+| Zakaria Kebayli | G00434173 | Tester |
+
+---
+
+## Links
+
+- **OneNote:** https://atlantictu-my.sharepoint.com/:o:/r/personal/g00415420_atu_ie/Documents/ProjectManagment/SB5?d=wf632b782682c478387b3c66e87d76b2d&csf=1&web=1&e=nVhFN2
+- **Jira:** https://sb5.atlassian.net/jira/software/projects/HELIOS/summary
+- **Demo:** [INSERT LINK]
+
+---
+
+## How to Clone
+
+```bash
