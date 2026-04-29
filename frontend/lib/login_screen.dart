@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'register_screen.dart';
 import 'home_screen.dart';
 
 // Screen for logging into an existing account
@@ -108,23 +107,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            // Link to register screen
-            Center(
-              child: Column(
-                children: [
-                  const Text("Don't Have an Account?"),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterScreen()),
-                      );
-                    },
-                    child: const Text("Create Account"),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
